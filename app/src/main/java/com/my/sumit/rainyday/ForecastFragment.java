@@ -1,5 +1,6 @@
 package com.my.sumit.rainyday;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -91,7 +92,13 @@ public class ForecastFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), mForecastAdapter.getItem(position).toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), mForecastAdapter.getItem(position).toString(), Toast.LENGTH_LONG).show();
+                String forecast = mForecastAdapter.getItem(position).toString();
+                //Now we will start the detail Activity when any item is clicked
+                // Executed in an Activity, so 'this' is the Context
+                // The fileUrl is a string URL, such as "http://www.example.com/image.png"
+                Intent detailIntent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
+                startActivity(detailIntent);
             }
         });
 
